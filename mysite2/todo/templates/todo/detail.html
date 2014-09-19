@@ -1,0 +1,14 @@
+<h1>{{ question.list_text }}</h1>
+
+{% if error_message %}<p><strong>{{ error_message }}</strong></p>{% endif %}
+
+<form action="{% url 'todo:vote' question.id %}" method="post">
+{% csrf_token %}
+{% for task in question.task_set.all %}
+    <input type="radio" name="task" id="task{{ forloop.counter }}" value="{{ task.id }}" />
+    <label for="task{{ forloop.counter }}">{{ task.task_name }}</label><br />
+{% endfor %}
+<input type="submit" value="Delete" />
+
+</form>
+
